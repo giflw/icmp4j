@@ -17,7 +17,6 @@
 			<artifactId>platform</artifactId>
 			<version>3.5.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<scope>provided</scope>
 			<groupId>junit</groupId>
