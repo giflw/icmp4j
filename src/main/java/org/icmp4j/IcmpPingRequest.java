@@ -42,6 +42,8 @@ public class IcmpPingRequest {
   private int ttl;
   private int packetSize;
   private long timeout;
+  public  String pingbin = "ping";
+  public  String options ="";
   
   // my attributes
   public void setHost (final String host) { this.host = host; }

@@ -74,7 +74,7 @@ public class LinuxProcessNativeBridge extends NativeBridge {
       final int packetSize = request.getPacketSize ();
       
       // execute the ping command
-      final String command = "ping -c 1 -s " + packetSize + " -w " + timeoutAsSeconds2 + " " + host;
+      final String command = request.pingbin + " " + request.options + " -c 1 -s " + packetSize + " -w " + timeoutAsSeconds2 + " " + host;
       final long icmpSendEchoStartTime = System.currentTimeMillis ();
       final List<String> stringList = ProcessUtil.executeProcessAndGetOutputAsStringList (command);
       final long icmpSendEchoDuration = System.currentTimeMillis () - icmpSendEchoStartTime;
