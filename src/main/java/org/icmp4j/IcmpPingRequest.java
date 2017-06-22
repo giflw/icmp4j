@@ -1,5 +1,6 @@
 package org.icmp4j;
 
+
 /**
  * Internet Control Message Protocol for Java (ICMP4J)
  * http://www.icmp4j.org
@@ -36,7 +37,7 @@ package org.icmp4j;
  * Time: 6:55:22 PM
  */
 public class IcmpPingRequest {
-  
+    
   // my attributes
   private String host;
   private int ttl;
@@ -55,4 +56,11 @@ public class IcmpPingRequest {
   
   public void setTimeout (final long timeout) { this.timeout = timeout; }
   public long getTimeout () { return timeout; }
+
+    @Override
+    public String toString() {
+        return "IcmpPingRequest{" + "host=" + host + ", ttl=" + ttl + ", packetSize=" + packetSize + ", timeout=" + timeout + '}';
+    }
+  
+  
 }
