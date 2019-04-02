@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.krishnact</groupId>
+	<artifactId>icmp4j</artifactId>
+	<version>0.0.1</version>
+	<description>A fork of icmp4j so that it can be used with jitpack</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>platform</artifactId>
+			<version>3.5.2</version>
+		</dependency>
+		<dependency>
+			<scope>provided</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+	</dependencies>
+</project>

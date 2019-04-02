@@ -11,3 +11,4 @@
 # commun annoying files
 .DS_Store
 Thumbs.db
+/target/

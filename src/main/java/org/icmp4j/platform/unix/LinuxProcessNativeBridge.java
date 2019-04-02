@@ -64,14 +64,13 @@ public class LinuxProcessNativeBridge extends NativeBridge {
             logger.debug("timeout: " + timeout);
             final int timeoutAsSeconds = timeout / 1000;
             logger.debug("timeoutAsSeconds: " + timeoutAsSeconds);
-            final int timeoutAsSeconds2 = timeoutAsSeconds > 0
-                    ? timeoutAsSeconds
-                    : 1;
+            final int timeoutAsSeconds2 = timeoutAsSeconds > 0 ? timeoutAsSeconds : 1;
             logger.debug("timeoutAsSeconds2: " + timeoutAsSeconds2);
             final int packetSize = request.getPacketSize();
 
             // execute the ping command
-            final String command = "ping -c 1 -s " + packetSize + " -w " + timeoutAsSeconds2 + " " + host;
+            final String command = request.pingbin + " " + request.options + " -c 1 -s " + packetSize + " -w "
+                    + timeoutAsSeconds2 + " " + host;
             logger.debug("Ping command: " + command);
             final long icmpSendEchoStartTime = System.currentTimeMillis();
             final List<String> stringList = ProcessUtil.executeProcessAndGetOutputAsStringList(command);
@@ -95,7 +94,7 @@ public class LinuxProcessNativeBridge extends NativeBridge {
         } catch (final Exception e) {
 
             // propagate
-            throw new RuntimeException(e); //NumberFormatException thrown here
+            throw new RuntimeException(e); // NumberFormatException thrown here
         }
     }
 
@@ -109,14 +108,15 @@ public class LinuxProcessNativeBridge extends NativeBridge {
 
         // look for the first line with some output
         // sample output from DEBIAN 6
-        //   ping existing host
-        //   root@database:~# ping -c 1 -s 32 -w 5 www.google.com
-        //   PING www.google.com (74.125.224.211) 32(60) bytes of data.
-        //   40 bytes from lax02s02-in-f19.1e100.net (74.125.224.211): icmp_req=1 ttl=56 time=47.2 ms
-        // 
-        //   ping non-existing host
-        //   ping -c 1 -s 32 -w 5 www.googgle.com
-        //   ping: unknown host www.googgle.com
+        // ping existing host
+        // root@database:~# ping -c 1 -s 32 -w 5 www.google.com
+        // PING www.google.com (74.125.224.211) 32(60) bytes of data.
+        // 40 bytes from lax02s02-in-f19.1e100.net (74.125.224.211): icmp_req=1 ttl=56
+        // time=47.2 ms
+        //
+        // ping non-existing host
+        // ping -c 1 -s 32 -w 5 www.googgle.com
+        // ping: unknown host www.googgle.com
         for (final String string : stringList) {
 
             // discriminate against non-ping lines
@@ -140,20 +140,11 @@ public class LinuxProcessNativeBridge extends NativeBridge {
                     size = Integer.parseInt(sizeAsString);
                 }
             }
-            final String responseAddress = StringUtil.parseString(
-                    string,
-                    "from ",
-                    " ");
-            final String ttlAsString = StringUtil.parseString(
-                    string,
-                    "ttl=",
-                    " ");
+            final String responseAddress = StringUtil.parseString(string, "from ", " ");
+            final String ttlAsString = StringUtil.parseString(string, "ttl=", " ");
             logger.debug("About to parseInt ttlAsString, which is: " + ttlAsString);
             final int ttl = Integer.parseInt(ttlAsString);
-            final String rttAsString = StringUtil.parseString(
-                    string,
-                    "time=",
-                    "ms");
+            final String rttAsString = StringUtil.parseString(string, "time=", "ms");
             final String rttAsString2 = rttAsString.trim();
             logger.debug("About to parseFloat rttAsString2, which is: " + rttAsString);
             final Float rttAsFloat = Float.parseFloat(rttAsString2);
