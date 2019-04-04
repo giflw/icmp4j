@@ -95,10 +95,11 @@ public class Icmp4jUtil {
         final Class<NativeBridge> nativeBridgeClass = (Class<NativeBridge>) Class.forName (nativeBridgeClassName);
         final NativeBridge nativeBridge = nativeBridgeClass.newInstance ();
 
+        // MUST initialize before assigning
+        nativeBridge.initialize ();
+        
         // track
         Icmp4jUtil.nativeBridge = nativeBridge;
-        
-        nativeBridge.initialize ();
       }
       catch (final Exception e) {
         
