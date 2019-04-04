@@ -102,7 +102,7 @@ public class SystemUtil {
    */
   private static InputStream findLibraryAsStream (final String libraryName) {
 
-    final String resourcePath = "/" + libraryName;
+    final String resourcePath = "/platform/unix/release/" + libraryName;
     final InputStream inputStream = SystemUtil.class.getResourceAsStream (resourcePath);
     final String message = inputStream == null ?
       "findResourceAsStream (): resource " + resourcePath + " not found" :
