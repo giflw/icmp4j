@@ -5,6 +5,13 @@ please check
 https://sourceforge.net/projects/icmp4j/?source=typ_redirect
 
 
+# Linux capabilities
+
+`sh
+sudo setcap cap_net_raw+eip java_binary
+`
+
+# Usage
 
 Sample code:
   import org.icmp4j.IcmpPingUtil;
